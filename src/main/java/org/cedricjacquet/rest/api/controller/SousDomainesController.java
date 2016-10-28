@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.cedricjacquet.rest.api.model.dao.DomaineRepository;
 import org.cedricjacquet.rest.api.model.dao.SousDomaineRepository;
-import org.cedricjacquet.rest.api.model.entity.Cycle;
 import org.cedricjacquet.rest.api.model.entity.Domaine;
 import org.cedricjacquet.rest.api.model.entity.SousDomaine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +92,7 @@ public class SousDomainesController {
 	
 	@RequestMapping(value = "cycles/{cycleId}/domaines/{domaineId}/sousdomaines/{sousDomaineId}",method = RequestMethod.DELETE)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void deleteClusterV1(
+	public void deleteSousDomaine(
 			@PathVariable Integer sousDomaineId
 			) {
 		sousDomaineRepository.delete(sousDomaineId);

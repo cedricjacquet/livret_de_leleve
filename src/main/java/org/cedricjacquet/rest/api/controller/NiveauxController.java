@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.cedricjacquet.rest.api.model.dao.CycleRepository;
-import org.cedricjacquet.rest.api.model.dao.DomaineRepository;
+import org.cedricjacquet.rest.api.model.dao.NiveauRepository;
 import org.cedricjacquet.rest.api.model.entity.Cycle;
-import org.cedricjacquet.rest.api.model.entity.Domaine;
+import org.cedricjacquet.rest.api.model.entity.Niveau;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,34 +28,33 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/lde/")
-public class DomainesController {
-
+public class NiveauxController {
 	@Autowired
 	private CycleRepository cycleRepository;
 	
 	@Autowired
-	private DomaineRepository domaineRepository;
+	private NiveauRepository niveauRepository;
 	
-	@RequestMapping(value = "cycles/{cycleId}/domaines",method = RequestMethod.GET)
-	public List<Domaine> getDomaines(@PathVariable Integer cycleId) {
+	@RequestMapping(value = "cycles/{cycleId}/niveaux",method = RequestMethod.GET)
+	public List<Niveau> getNiveaux(@PathVariable Integer cycleId) {
 		Cycle cycle = cycleRepository.findOne(cycleId);
 		if (cycle != null) {
-			return cycle.getDomaines();
+			return cycle.getNiveaux();
 		}
 		return new ArrayList<>();
 	}
 	
-	@RequestMapping(value = "cycles/{cycleId}/domaines/{domaineId}", method = RequestMethod.GET)
-	public Domaine getDomaine(
+	@RequestMapping(value = "cycles/{cycleId}/niveaux/{niveauId}", method = RequestMethod.GET)
+	public Niveau getNiveau(
 			@PathVariable Integer cycleId,
-			@PathVariable Integer domaineId
+			@PathVariable Integer niveauId
 			) {
-		return domaineRepository.findOne(domaineId);
+		return niveauRepository.findOne(niveauId);
 	}
 	
-	@RequestMapping(value = "cycles/{cycleId}/domaines",  method = RequestMethod.POST)
+	@RequestMapping(value = "cycles/{cycleId}/niveaux",  method = RequestMethod.POST)
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void addDomaine(
+	public void addNiveau(
 			@PathVariable Integer cycleId,
 			@RequestParam(name = "nom", required = true) String nom,
 			@RequestParam(name = "ordreAffichage", required = true) int ordreAffichage,
@@ -63,42 +62,41 @@ public class DomainesController {
 			HttpServletResponse response) {
 		Cycle cycle = cycleRepository.findOne(cycleId);
 		if (cycle != null) {
-			Domaine domaine = new Domaine();
-			domaine.setNom(nom);
-			domaine.setOrdreAffichage(ordreAffichage);
-			domaine.setCycle(cycle);
-			domaineRepository.save(domaine);
-			response.setHeader("Location", request.getRequestURL().append("/"+domaine.getId()).toString());
+			Niveau niveau = new Niveau();
+			niveau.setNom(nom);
+			niveau.setOrdreAffichage(ordreAffichage);
+			niveau.setCycle(cycle);
+			niveauRepository.save(niveau);
+			response.setHeader("Location", request.getRequestURL().append("/"+niveau.getId()).toString());
 		}
 	}
 	
-	@RequestMapping(value = "cycles/{cycleId}/domaines/{domaineId}",method = RequestMethod.PATCH)
+	@RequestMapping(value = "cycles/{cycleId}/niveaux/{niveauId}",method = RequestMethod.PATCH)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void updateDomaine(
+	public void updateNiveau(
 			@PathVariable Integer cycleId,
-			@PathVariable Integer domaineId,
+			@PathVariable Integer niveauId,
 			@RequestParam(name = "nom", required = false) String nom,
 			@RequestParam(name = "ordreAffichage", required = false) Integer ordreAffichage
 			)  {
-		Domaine domaine = domaineRepository.findOne(domaineId);
-		if (domaine != null) {
+		Niveau niveau = niveauRepository.findOne(niveauId);
+		if (niveau != null) {
 			if (nom != null) {
-				domaine.setNom(nom);
+				niveau.setNom(nom);
 			}
 			if (ordreAffichage != null) {
-				domaine.setOrdreAffichage(ordreAffichage);
+				niveau.setOrdreAffichage(ordreAffichage);
 			}
-			domaineRepository.save(domaine);
+			niveauRepository.save(niveau);
 		}
 	}
 	
-	@RequestMapping(value = "cycles/{cycleId}/domaines/{domaineId}",method = RequestMethod.DELETE)
+	@RequestMapping(value = "cycles/{cycleId}/niveaux/{niveauId}",method = RequestMethod.DELETE)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void deleteDomaine(
+	public void deleteNiveau(
 			@PathVariable Integer cycleId,
-			@PathVariable Integer domaineId
+			@PathVariable Integer niveauId
 			) {
-		domaineRepository.delete(domaineId);
+		niveauRepository.delete(niveauId);
 	}
-	
 }

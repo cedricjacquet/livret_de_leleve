@@ -16,11 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 
- * @author cjacquet
- *
- */
-/**
  * @author cjacquet
  *
  */
@@ -79,7 +74,7 @@ public class CyclesController {
 	
 	@RequestMapping(value = "/{cycleId}",method = RequestMethod.DELETE)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void deleteClusterV1(
+	public void deleteCycle(
 			@PathVariable Integer cycleId
 			) {
 		cycleRepository.delete(cycleId);
