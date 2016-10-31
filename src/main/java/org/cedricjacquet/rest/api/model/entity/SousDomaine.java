@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author cjacquet
@@ -25,9 +27,11 @@ public class SousDomaine extends OrderableEntity implements Serializable{
 	 */
 	private static final long serialVersionUID = 5676902241793811380L;
 
+	@JsonIgnore
 	@OneToMany(targetEntity=Competence.class, mappedBy="sousDomaine", cascade=CascadeType.ALL)
 	private List<Competence> competences;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "domaine_id", unique = false, nullable = false)
 	private Domaine domaine;

@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author cjacquet
  *
@@ -27,10 +29,12 @@ public class Domaine extends OrderableEntity implements Serializable{
 	 */
 	private static final long serialVersionUID = 6180284804680027492L;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cycle_id", unique = false, nullable = false)
 	private Cycle cycle;
 	
+	@JsonIgnore
 	@OneToMany(targetEntity=SousDomaine.class, mappedBy="domaine", cascade=CascadeType.ALL)
 	private List<SousDomaine> sousDomaines;
 

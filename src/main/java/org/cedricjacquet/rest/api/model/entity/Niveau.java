@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author cjacquet
@@ -25,9 +27,11 @@ public class Niveau extends OrderableEntity implements Serializable{
 	 */
 	private static final long serialVersionUID = 1535196726713600203L;
 	
+	@JsonIgnore
 	@OneToMany(targetEntity=Eleve.class, mappedBy="niveau", cascade=CascadeType.ALL)
 	private List<Eleve> eleves;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cycle_id", unique = false, nullable = false)
 	private Cycle cycle;

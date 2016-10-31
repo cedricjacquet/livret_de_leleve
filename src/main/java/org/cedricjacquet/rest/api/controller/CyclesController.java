@@ -1,6 +1,9 @@
 package org.cedricjacquet.rest.api.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,8 +31,8 @@ public class CyclesController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public Iterable<Cycle> getCycles() {
-		return cycleRepository.findAll();
+	public List<Cycle> getCycles() {
+		return (List<Cycle>) cycleRepository.findAll();
 	}
 	
 	@RequestMapping(value = "/{cycleId}", method = RequestMethod.GET)

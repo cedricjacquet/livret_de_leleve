@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author cjacquet
@@ -23,9 +25,11 @@ public class Cycle extends OrderableEntity implements Serializable{
 	 */
 	private static final long serialVersionUID = 8265164845639362548L;
 
+	@JsonIgnore
 	@OneToMany(targetEntity=Niveau.class, mappedBy="cycle", cascade=CascadeType.ALL)
 	private List<Niveau> niveaux;
 	
+	@JsonIgnore
 	@OneToMany(targetEntity=Domaine.class, mappedBy="cycle", cascade=CascadeType.ALL)
 	private List<Domaine> domaines;
 

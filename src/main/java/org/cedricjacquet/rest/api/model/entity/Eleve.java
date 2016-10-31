@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author cjacquet
@@ -32,9 +34,11 @@ public class Eleve extends IdentifiableEntity implements Serializable{
 	@Column(name = "prenom", unique = false, nullable = false)
 	private String prenom;
 	
+	@JsonIgnore
 	@OneToMany(targetEntity=NiveauCompetence.class, mappedBy="eleve", cascade=CascadeType.ALL)
 	private List<NiveauCompetence> niveauCompetences;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "niveau_id", unique = false, nullable = false)
 	private Niveau niveau;

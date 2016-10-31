@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author cjacquet
@@ -30,10 +32,12 @@ public class NiveauCompetence extends IdentifiableEntity implements Serializable
 	@Column(name = "date_creation", unique = false, nullable = false)
 	private Timestamp dateCreation;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "competence_id", unique = false, nullable = false)
 	private Competence competence;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "eleve_id", unique = false, nullable = false)
 	private Eleve eleve;
