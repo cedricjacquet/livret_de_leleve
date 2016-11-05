@@ -37,8 +37,8 @@ public class ElevesController {
 	
 	@RequestMapping(value = "cycles/{cycleId}/niveaux/{niveauId}/eleves",method = RequestMethod.GET)
 	public List<Eleve> getEleves(
-			@PathVariable Integer domaineId) {
-		Niveau niveau = niveauRepository.findOne(domaineId);
+			@PathVariable Integer niveauId) {
+		Niveau niveau = niveauRepository.findOne(niveauId);
 		if (niveau != null) {
 			return niveau.getEleves();
 		}

@@ -1,173 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title th:text="'Hello, ' + ${nom} + '!'" />
-		<meta name="description" content="description" />
-		<meta name="author" content="DevOOPS" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link href="../plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-		<link href="../plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-		<link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css' />
-		<link href="../plugins/fancybox/jquery.fancybox.css" rel="stylesheet"/>
-		<link href="../plugins/fullcalendar/fullcalendar.css" rel="stylesheet" />
-		<link href="../plugins/xcharts/xcharts.min.css" rel="stylesheet" />
-		<link href="../plugins/select2/select2.css" rel="stylesheet" />
-		<link href="../plugins/justified-gallery/justifiedGallery.css" rel="stylesheet" />
-		<link href="../css/style_v2.css" rel="stylesheet" />
-		<link href="../plugins/chartist/chartist.min.css" rel="stylesheet" />
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-				<script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
-				<script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
-		<![endif]-->
-	</head>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"></meta>
+	<title th:text="'Hello, ' + ${nom} + '!'" ></title>
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+	<link th:href="@{~/css/materialize.css}" type="text/css" rel="stylesheet" media="screen,projection"></link>
+	<link th:href="@{~/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"></link>
+</head>
 <body>
-<!--Start Header-->
-<div id="screensaver">
-	<canvas id="canvas"></canvas>
-	<i class="fa fa-lock" id="screen_unlock"></i>
-</div>
-<div id="modalbox">
-	<div class="devoops-modal">
-		<div class="devoops-modal-header">
-			<div class="modal-header-name">
-				<span>Basic table</span>
-			</div>
-			<div class="box-icons">
-				<a class="close-link">
-					<i class="fa fa-times"></i>
-				</a>
+	<nav>
+		<div class="nav-wrapper">
+			<div class="col s12">
+				<a th:href="'/cycles/'+ ${nom}" class="breadcrumb" th:text="${nom}" ></a>
 			</div>
 		</div>
-		<div class="devoops-modal-inner">
-		</div>
-		<div class="devoops-modal-bottom">
-		</div>
-	</div>
-</div>
-<header class="navbar">
-	<div class="container-fluid expanded-panel">
-		<div class="row">
-			<div id="logo" class="col-xs-12 col-sm-2">
-				<a href="index.html">Livret de l'élève</a>
-			</div>
-			<div id="top-panel" class="col-xs-12 col-sm-10">
-				<div class="row">
-					<div class="col-xs-8 col-sm-4">
-					</div>
-					<div class="col-xs-4 col-sm-8 top-panel-right">
-						<a href="index_v1.html" class="style1"></a>
-						<ul class="nav navbar-nav pull-right panel-menu">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle account" data-toggle="dropdown">
-									<div class="avatar">
-										<img src="../img/avatar.jpg" class="img-circle" alt="avatar" />
-									</div>
-									<i class="fa fa-angle-down pull-right"></i>
-									<div class="user-mini pull-right">
-										<span class="welcome">Bonjour,</span>
-										<span>Charlène</span>
-									</div>
-								</a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href="#">
-											<i class="fa fa-user"></i>
-											<span>Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="ajax/page_messages.html" class="ajax-link">
-											<i class="fa fa-envelope"></i>
-											<span>Messages</span>
-										</a>
-									</li>
-									<li>
-										<a href="ajax/gallery_simple.html" class="ajax-link">
-											<i class="fa fa-picture-o"></i>
-											<span>Albums</span>
-										</a>
-									</li>
-									<li>
-										<a href="ajax/calendar.html" class="ajax-link">
-											<i class="fa fa-tasks"></i>
-											<span>Tasks</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-cog"></i>
-											<span>Settings</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-power-off"></i>
-											<span>Logout</span>
-										</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</header>
-<!--End Header-->
-<!--Start Container-->
-<div id="main" class="container-fluid">
-	<div class="row">
-		<div id="sidebar-left" class="col-xs-2 col-sm-2">
-			<ul class="nav main-menu">
-				<li>
-					<a href="/../ajax/dashboard.html" class="ajax-link">
-						<i class="fa fa-dashboard"></i>
-						<span class="hidden-xs">Dashboard</span>
-					</a>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle">
-						<i class="fa fa-bar-chart-o"></i>
-						<span class="hidden-xs">Niveaux</span>
-					</a>
-					<ul class="dropdown-menu" id="niveaux-menu" />
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle">
-						<i class="fa fa-bar-chart-o"></i>
-						<span class="hidden-xs">Cycles</span>
-					</a>
-					<ul class="dropdown-menu" id="cycles-menu" />
-				</li>
-
+	</nav>
+	<div class="section no-pad-bot" id="index-banner">
+		<div class="container">
+			<br /> <br/>
+			<ul class="collection with-header" id="niveauxCollections">
+				<li class="collection-header"><h4>Niveaux</h4></li>
 			</ul>
+			<br /> <br/>
+
 		</div>
-		
-		<div id="content" class="col-xs-12 col-sm-10">
-			<div class="preloader">
-				<img src="img/devoops_getdata.gif" class="devoops-getdata" alt="preloader"/>
-			</div>
-			<div id="ajax-content"></div>
-		</div>
-		
 	</div>
-</div>
-<!--End Container-->
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!--<script src="http://code.jquery.com/jquery.js"></script>-->
-<script src="../plugins/jquery/jquery.min.js"></script>
-<script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../plugins/bootstrap/bootstrap.min.js"></script>
-<script src="../plugins/justified-gallery/jquery.justifiedGallery.min.js"></script>
-<script src="../plugins/tinymce/tinymce.min.js"></script>
-<script src="../plugins/tinymce/jquery.tinymce.min.js"></script>
-<!-- All functions for this theme + document.ready processing -->
-<script th:inline="javascript">
+
+	<footer class="page-footer orange">
+		<div class="footer-copyright">
+			<div class="container">
+				Made by Cedric Jacquet
+			</div>
+		</div>
+	</footer>
+
+
+	<!--  Scripts-->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script th:src="@{~/js/materialize.js}"></script>
+	<script th:src="@{~/js/init.js}"></script>
+	<script th:inline="javascript">
 /*<![CDATA[*/
 
     var cycleNom = [[${nom}]];
@@ -175,7 +49,7 @@
 
 /*]]>*/
 </script>
-<script src="../js/devoops.js"></script>
-<script src="../js/livretdeleleve.js"></script>
+	<script th:src="@{~/js/cycles.js}"></script>
+
 </body>
 </html>
