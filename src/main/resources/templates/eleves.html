@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"></meta>
+	<title th:text="'Hello, ' + ${eleveNom} + ' ' + ${elevePrenom} +' !'" ></title>
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+	<link th:href="@{~/css/materialize.css}" type="text/css" rel="stylesheet" media="screen,projection"></link>
+	<link th:href="@{~/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"></link>
+</head>
+<body>
+	<nav>
+		<div class="nav-wrapper">
+			<div class="col s12">
+				<a th:href="@{~/cycles/{cycleId}(cycleId=${cycleId})}" class="breadcrumb" th:text="${cycleNom}" ></a>
+				<a th:href="@{~/cycles/{cycleId}/niveaux/{niveauId}(cycleId=${cycleId},niveauId=${niveauId})}" class="breadcrumb" th:text="${niveauNom}" ></a>
+				<a th:href="@{~/cycles/{cycleId}/niveaux/{niveauId}/eleves/{eleveId}(cycleId=${cycleId},niveauId=${niveauId},eleveId=${eleveId})}" class="breadcrumb" th:text="${elevePrenom}+' '+${eleveNom}" ></a>
+			</div>
+		</div>
+	</nav>
+	<div class="section no-pad-bot" id="index-banner">
+		<div class="container">
+			<br /> <br/>
+			<ul class="collection with-header" id="domainesCollections">
+				<li class="collection-header"><h4 th:text="${eleveNom}+' '+${elevePrenom}+' - '+${niveauNom}+' - '+${cycleNom}"></h4></li>
+			</ul>
+			<br /> <br/>
+
+		</div>
+	</div>
+
+	<footer class="page-footer orange">
+		<div class="footer-copyright">
+			<div class="container">
+				Made by Cedric Jacquet
+			</div>
+		</div>
+	</footer>
+
+
+	<!--  Scripts-->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script th:src="@{~/js/materialize.js}"></script>
+	<script th:src="@{~/js/init.js}"></script>
+	<script th:inline="javascript">
+/*<![CDATA[*/
+
+    var cycleNom = [[${cycleNom}]];
+    var cycleId = [[${cycleId}]];
+    var niveauNom = [[${niveauNom}]];
+    var niveauId = [[${niveauId}]];
+    var eleveNom = [[${eleveNom}]];
+    var elevePrenom = [[${elevePrenom}]];
+    var eleveId = [[${eleveId}]];
+
+/*]]>*/
+</script>
+	<script th:src="@{~/js/eleves.js}"></script>
+
+</body>
+</html>
